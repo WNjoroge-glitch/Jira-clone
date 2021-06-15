@@ -1,6 +1,6 @@
 import React from 'react';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
-
+import {Link} from 'react-router-dom';
 
 function Todo({data,id}) {
   
@@ -33,7 +33,7 @@ function Todo({data,id}) {
                                                            
                                                            className="list">
                                                                
-                                                               {li.content}
+                                                               <Link to="/issue">{li.content}</Link>
                                                           </li>
                                                       
                                                   )}
@@ -44,9 +44,11 @@ function Todo({data,id}) {
                                   
                                 
                                           </ul>
+                                          
                                           </div>
                                           {/* <div className="div-heading" id="second-div">
                                               <h1>Doing</h1>
+                                            
                                           </div>
                                           <div className="div-heading" id="third-div">
                                               <h1>Done</h1>

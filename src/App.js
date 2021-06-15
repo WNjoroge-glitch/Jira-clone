@@ -6,6 +6,8 @@ import Finished from './Components/Finished';
 import {DragDropContext} from 'react-beautiful-dnd';
 import Data from './Data';
 import uuid from 'react-uuid';
+import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
+import Issues from './Components/Issues';
 
 
 
@@ -18,15 +20,16 @@ function App() {
 
   const onSubmit = (e) => {
     e.preventDefault()
-    let newData = {id:uuid(),content:value}
-    let newDatas = [...Data,newData]
-    setData(newDatas)
+   
+    setData(data => [...data,{id:uuid(),content:value}])
+    
+    
     
 }
 
-  useEffect(() => {
-    setData(Data)
-  }, [])
+  // useEffect(() => {
+  //   setData(Data)
+  // }, [])
 
 const dragEnd = (result) => {
    const { destination, source} = result
@@ -115,12 +118,12 @@ const dragEnd = (result) => {
   return (
     
     <DragDropContext onDragEnd={dragEnd}>
-    <div className="App">
-    
-    <Todo id="1" data={data} />
-     <InProgress id="2" list={listItem} />
-     <Finished id="3" list={listItem1}/>
-     <div>
+      <Router>
+      <div className="App">
+        <div className="container">
+          <Route exact path="/">
+          
+    <div>
             <h1>Add Task</h1>
             <form onSubmit={onSubmit}>
                 <input type="text" placeholder="add task" value={value} onChange={(e) => setValue(e.target.value)}/>
@@ -128,8 +131,23 @@ const dragEnd = (result) => {
             </form>
            
         </div>
+        <Todo id="1" data={data}/>
+    <InProgress id="2" list={listItem} />
+    <Finished id="3" list={listItem1}/>
+          </Route>
+      
+        </div>
+      
+    
+    
+     <Route path="/issue">
+      <Issues/>
+    </Route>
+     
      
     </div>
+      </Router>
+   
     </DragDropContext>
     
     
